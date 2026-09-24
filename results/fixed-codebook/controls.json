@@ -1,0 +1,45 @@
+{
+  "passed": 8,
+  "controls": [
+    {
+      "name": "drop-packing-cell",
+      "passed": true,
+      "rejection": "packing lower bound does not meet witness size"
+    },
+    {
+      "name": "duplicate-packing-cell",
+      "passed": true,
+      "rejection": "packing has duplicate cells"
+    },
+    {
+      "name": "mutate-circuit-cube",
+      "passed": true,
+      "rejection": "attaining circuit violates relation"
+    },
+    {
+      "name": "zero-output-mask",
+      "passed": true,
+      "rejection": "bad term mask"
+    },
+    {
+      "name": "drop-frontier-point",
+      "passed": true,
+      "rejection": "frontier mismatch"
+    },
+    {
+      "name": "alter-encoder-row",
+      "passed": true,
+      "rejection": "encoder row mapping mismatch"
+    },
+    {
+      "name": "understate-minimum",
+      "passed": true,
+      "rejection": "product count mismatch"
+    },
+    {
+      "name": "alter-forced-zero-set",
+      "passed": true,
+      "rejection": "forced-zero set mismatch"
+    }
+  ]
+}

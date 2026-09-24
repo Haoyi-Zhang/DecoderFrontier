@@ -1,0 +1,1 @@
+{"accepted":true,"case":"X01","planes_checked":4,"cubes_checked":756,"packing_pairs_checked":37,"frontier":[[1,20],[2,18]],"checker_cpu_seconds":0.013302956000000032,"checker_wall_seconds":0.013308162000157608,"peak_rss_kib":93476}

@@ -1,0 +1,289 @@
+{
+  "accepted": true,
+  "cases": 16,
+  "encoders_covered": 174,
+  "encoder_plane_certificates": 174,
+  "decoder_relation_certificates": 210,
+  "semantic_infeasible_profiles": 234,
+  "feasible_encoder_bound_relations": 210,
+  "dpll_search_nodes": 88664,
+  "stored_proof_tree_records": 44524,
+  "proof_checker_node_visits": 88664,
+  "proof_checker_conflict_leaf_visits": 44524,
+  "frontier_points": 18,
+  "generation_cpu_seconds": 25.26212808,
+  "generation_wall_seconds_sum": 25.301890936999598,
+  "checking_cpu_seconds": 16.908544094,
+  "checking_wall_seconds_sum": 16.917127497000138,
+  "certificate_bytes": 874468,
+  "mutation_controls_passed": 8,
+  "per_case": [
+    {
+      "case": "B01",
+      "encoders": 12,
+      "encoder_planes": 12,
+      "decoder_relations": 12,
+      "proof_search_nodes": 60,
+      "proof_records": 42,
+      "frontier": [
+        [
+          1,
+          5
+        ]
+      ],
+      "generation_cpu_seconds": 0.010531769999999996,
+      "checking_cpu_seconds": 0.005940875000000012
+    },
+    {
+      "case": "B02",
+      "encoders": 24,
+      "encoder_planes": 24,
+      "decoder_relations": 48,
+      "proof_search_nodes": 5796,
+      "proof_records": 2934,
+      "frontier": [
+        [
+          1,
+          10
+        ]
+      ],
+      "generation_cpu_seconds": 2.302630922,
+      "checking_cpu_seconds": 0.530809074
+    },
+    {
+      "case": "B03",
+      "encoders": 24,
+      "encoder_planes": 24,
+      "decoder_relations": 32,
+      "proof_search_nodes": 6612,
+      "proof_records": 3334,
+      "frontier": [
+        [
+          1,
+          10
+        ]
+      ],
+      "generation_cpu_seconds": 1.640262764,
+      "checking_cpu_seconds": 0.755070194
+    },
+    {
+      "case": "B04",
+      "encoders": 24,
+      "encoder_planes": 24,
+      "decoder_relations": 24,
+      "proof_search_nodes": 6872,
+      "proof_records": 3460,
+      "frontier": [
+        [
+          2,
+          10
+        ]
+      ],
+      "generation_cpu_seconds": 1.377717299,
+      "checking_cpu_seconds": 0.803900504
+    },
+    {
+      "case": "B05",
+      "encoders": 2,
+      "encoder_planes": 2,
+      "decoder_relations": 4,
+      "proof_search_nodes": 20,
+      "proof_records": 13,
+      "frontier": [
+        [
+          0,
+          8
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "generation_cpu_seconds": 0.02482512099999995,
+      "checking_cpu_seconds": 0.008824168000000021
+    },
+    {
+      "case": "B06",
+      "encoders": 20,
+      "encoder_planes": 20,
+      "decoder_relations": 22,
+      "proof_search_nodes": 176,
+      "proof_records": 109,
+      "frontier": [
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "generation_cpu_seconds": 0.08789771600000001,
+      "checking_cpu_seconds": 0.034756648
+    },
+    {
+      "case": "B07",
+      "encoders": 2,
+      "encoder_planes": 2,
+      "decoder_relations": 2,
+      "proof_search_nodes": 4,
+      "proof_records": 4,
+      "frontier": [
+        [
+          1,
+          5
+        ]
+      ],
+      "generation_cpu_seconds": 0.00253680700000003,
+      "checking_cpu_seconds": 0.001244463000000029
+    },
+    {
+      "case": "B08",
+      "encoders": 6,
+      "encoder_planes": 6,
+      "decoder_relations": 6,
+      "proof_search_nodes": 72,
+      "proof_records": 42,
+      "frontier": [
+        [
+          1,
+          7
+        ]
+      ],
+      "generation_cpu_seconds": 0.02273755300000002,
+      "checking_cpu_seconds": 0.00911250800000002
+    },
+    {
+      "case": "T01",
+      "encoders": 6,
+      "encoder_planes": 6,
+      "decoder_relations": 6,
+      "proof_search_nodes": 24,
+      "proof_records": 18,
+      "frontier": [
+        [
+          1,
+          5
+        ]
+      ],
+      "generation_cpu_seconds": 0.0048565099999999806,
+      "checking_cpu_seconds": 0.0031115620000000677
+    },
+    {
+      "case": "T02",
+      "encoders": 24,
+      "encoder_planes": 24,
+      "decoder_relations": 24,
+      "proof_search_nodes": 68680,
+      "proof_records": 34364,
+      "frontier": [
+        [
+          2,
+          12
+        ]
+      ],
+      "generation_cpu_seconds": 19.371270135,
+      "checking_cpu_seconds": 14.680283032
+    },
+    {
+      "case": "T03",
+      "encoders": 6,
+      "encoder_planes": 6,
+      "decoder_relations": 6,
+      "proof_search_nodes": 48,
+      "proof_records": 30,
+      "frontier": [
+        [
+          1,
+          7
+        ]
+      ],
+      "generation_cpu_seconds": 0.104310142,
+      "checking_cpu_seconds": 0.01580084599999998
+    },
+    {
+      "case": "T04",
+      "encoders": 2,
+      "encoder_planes": 2,
+      "decoder_relations": 2,
+      "proof_search_nodes": 4,
+      "proof_records": 4,
+      "frontier": [
+        [
+          1,
+          7
+        ]
+      ],
+      "generation_cpu_seconds": 0.03209238000000003,
+      "checking_cpu_seconds": 0.005543332999999984
+    },
+    {
+      "case": "T05",
+      "encoders": 2,
+      "encoder_planes": 2,
+      "decoder_relations": 2,
+      "proof_search_nodes": 4,
+      "proof_records": 4,
+      "frontier": [
+        [
+          1,
+          5
+        ]
+      ],
+      "generation_cpu_seconds": 0.0015705579999999997,
+      "checking_cpu_seconds": 0.0011863570000000268
+    },
+    {
+      "case": "T06",
+      "encoders": 2,
+      "encoder_planes": 2,
+      "decoder_relations": 2,
+      "proof_search_nodes": 4,
+      "proof_records": 4,
+      "frontier": [
+        [
+          1,
+          7
+        ]
+      ],
+      "generation_cpu_seconds": 0.02133897100000004,
+      "checking_cpu_seconds": 0.004886245000000011
+    },
+    {
+      "case": "T07",
+      "encoders": 12,
+      "encoder_planes": 12,
+      "decoder_relations": 12,
+      "proof_search_nodes": 240,
+      "proof_records": 132,
+      "frontier": [
+        [
+          1,
+          8
+        ]
+      ],
+      "generation_cpu_seconds": 0.19069812100000005,
+      "checking_cpu_seconds": 0.031956738999999956
+    },
+    {
+      "case": "T08",
+      "encoders": 6,
+      "encoder_planes": 6,
+      "decoder_relations": 6,
+      "proof_search_nodes": 48,
+      "proof_records": 30,
+      "frontier": [
+        [
+          1,
+          7
+        ]
+      ],
+      "generation_cpu_seconds": 0.06685131100000002,
+      "checking_cpu_seconds": 0.016117545999999983
+    }
+  ],
+  "scope": "Exact finite grammar and locked cases only. Unit-conflict DPLL trees are independently replayed; they are not DRAT/VeriPB logs or proof-assistant theorems.",
+  "aggregation_cpu_seconds": 0.016268521000000036,
+  "peak_rss_kib": 100272
+}
