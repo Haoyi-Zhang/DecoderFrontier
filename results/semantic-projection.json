@@ -41643,7 +41643,7 @@
     }
   ],
   "profile_count": 444,
-  "cpu_seconds": 0.011375456999999978,
-  "peak_rss_kib": 94036,
+  "cpu_seconds": 0.008742726000000034,
+  "peak_rss_kib": 93988,
   "scope": "Unrestricted total-decoder semantics only; not circuit cost certification."
 }

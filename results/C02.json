@@ -15,7 +15,7 @@
     "connection_cap": 48
   },
   "candidate_designs": 0,
-  "explicit_error_pair_evaluations": 0,
+  "candidate_source_received_obligations_covered": 0,
   "pair_nonexpanding_encoders": 0,
   "pair_radius1_pass_total_fail_designs": 0,
   "frontier": [],
@@ -29,7 +29,7 @@
   "distinct_encoder_tables": 0,
   "distinct_decoder_tables": 0,
   "cover_dynamic_program_states": 0,
-  "cpu_seconds": 4.631899999996136e-05,
-  "wall_seconds": 4.753200005325198e-05,
-  "peak_rss_kib": 94000
+  "cpu_seconds": 4.714000000000107e-05,
+  "wall_seconds": 4.834199990000343e-05,
+  "peak_rss_kib": 92720
 }

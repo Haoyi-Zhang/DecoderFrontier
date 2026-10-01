@@ -136,7 +136,7 @@ def run_case(spec: dict, directory: Path) -> dict:
     best = [None] * (k+1)
     best_pair = [None] * (k+1)
     candidates = 0
-    robust_checks = 0
+    candidate_source_received_obligations = 0
     pair_pass_total_fail = 0
     pair_nonexpanding_encoders = 0
     histogram = {}
@@ -172,7 +172,7 @@ def run_case(spec: dict, directory: Path) -> dict:
             if gates > spec['gate_cap']:
                 continue
             error = max(row_errors[r][z] for r,z in enumerate(dec))
-            robust_checks += sum(len(x) for x in sources)
+            candidate_source_received_obligations += sum(len(x) for x in sources)
             pair_pass_total_fail += int(pair_error <= 1 < error)
             histogram[(error,gates)] = histogram.get((error,gates),0)+1
             witness = {'error':error,'gates':gates,'products':products,
@@ -199,7 +199,7 @@ def run_case(spec: dict, directory: Path) -> dict:
                                   'total_error_of_witness':w['error']})
             prior = w['gates']
     result = {'case':spec,'candidate_designs':candidates,
-              'explicit_error_pair_evaluations':robust_checks,
+              'candidate_source_received_obligations_covered':candidate_source_received_obligations,
               'pair_nonexpanding_encoders':pair_nonexpanding_encoders,
               'pair_radius1_pass_total_fail_designs':pair_pass_total_fail,
               'frontier':frontier,'pair_only_frontier':pair_frontier,

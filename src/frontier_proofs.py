@@ -609,16 +609,34 @@ def generate_case(spec: dict) -> dict:
             frontier.append(witness)
             previous = witness["gates"]
 
-    proof_nodes = sum(
-        plane["lower_bound"]["proof"]["search_nodes"]
+    planes = [
+        plane
         for collection in (encoder_planes, decoder_planes)
         for plane in collection.values()
+    ]
+    lower_bound_proof_nodes = sum(
+        plane["lower_bound"]["proof"]["search_nodes"]
+        for plane in planes
         if plane["lower_bound"]["proof"] is not None
     )
+    satisfying_witness_nodes = sum(
+        next(attempt["search_nodes"] for attempt in plane["attempts"] if attempt["satisfiable"])
+        for plane in planes
+    )
+    earlier_unsat_nodes = sum(
+        sum(attempt["search_nodes"] for attempt in plane["attempts"] if not attempt["satisfiable"])
+        - (plane["lower_bound"]["proof"]["search_nodes"] if plane["lower_bound"]["proof"] is not None else 0)
+        for plane in planes
+    )
+    all_generation_nodes = sum(
+        sum(attempt["search_nodes"] for attempt in plane["attempts"])
+        for plane in planes
+    )
+    if all_generation_nodes != lower_bound_proof_nodes + satisfying_witness_nodes + earlier_unsat_nodes:
+        raise RuntimeError("DPLL search-node accounting mismatch")
     proof_tree_records = sum(
         len(plane["lower_bound"]["proof"]["nodes"])
-        for collection in (encoder_planes, decoder_planes)
-        for plane in collection.values()
+        for plane in planes
         if plane["lower_bound"]["proof"] is not None
     )
     return {
@@ -633,7 +651,10 @@ def generate_case(spec: dict) -> dict:
             "encoders": len(mappings),
             "encoder_plane_certificates": len(encoder_planes),
             "decoder_relation_certificates": len(decoder_planes),
-            "dpll_search_nodes": proof_nodes,
+            "lower_bound_proof_search_nodes": lower_bound_proof_nodes,
+            "satisfying_witness_search_nodes": satisfying_witness_nodes,
+            "earlier_unsat_search_nodes": earlier_unsat_nodes,
+            "all_generation_search_nodes": all_generation_nodes,
             "stored_proof_tree_records": proof_tree_records,
         },
         "cpu_seconds": time.process_time() - begin_cpu,

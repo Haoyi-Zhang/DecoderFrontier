@@ -64,7 +64,14 @@ def row_sources(mapping: tuple[int, ...], received: int) -> tuple[int, ...]:
     return tuple(message for message, code in enumerate(mapping) if distance(code, received) <= 1)
 
 
-def row_outputs(mapping: tuple[int, ...], received: int, bound: int) -> tuple[int, ...]:
+def row_outputs(
+    mapping: tuple[int, ...],
+    received: int,
+    bound: int,
+    metrics: dict[str, int] | None = None,
+) -> tuple[int, ...]:
+    if metrics is not None:
+        metrics["row_output_calls"] = metrics.get("row_output_calls", 0) + 1
     inverse = {code: message for message, code in enumerate(mapping)}
     sources = row_sources(mapping, received)
     return tuple(
@@ -74,9 +81,9 @@ def row_outputs(mapping: tuple[int, ...], received: int, bound: int) -> tuple[in
     )
 
 
-def minimum_bound(mapping: tuple[int, ...]) -> int:
+def minimum_bound(mapping: tuple[int, ...], metrics: dict[str, int] | None = None) -> int:
     for bound in range(4):
-        if all(row_outputs(mapping, received, bound) for received in range(16)):
+        if all(row_outputs(mapping, received, bound, metrics) for received in range(16)):
             return bound
     raise ValueError("no feasible three-bit decoder bound")
 
@@ -95,6 +102,7 @@ def check(spec: dict, result: dict) -> dict:
     delivered = result.get("records")
     require(isinstance(delivered, list), "records missing")
     delivered_mappings: set[tuple[int, ...]] = set()
+    metrics: dict[str, int] = {"row_output_calls": 0}
     for record in delivered:
         require(set(record) == {"mapping", "omitted_codeword", "minimum_total_decoder_error", "first_bound_one_obstruction"}, "record fields differ")
         mapping = tuple(int(word, 2) for word in record["mapping"])
@@ -104,12 +112,12 @@ def check(spec: dict, result: dict) -> dict:
         require(all(distance(mapping[i], mapping[j]) >= distance(i, j) for i in range(8) for j in range(i)), "mapping violates printed pairwise rule")
         omitted = next(code for code in allowed if code not in mapping)
         require(record["omitted_codeword"] == format(omitted, "04b"), "omitted word mismatch")
-        exact_minimum = minimum_bound(mapping)
+        exact_minimum = minimum_bound(mapping, metrics)
         require(record["minimum_total_decoder_error"] == exact_minimum, "minimum total error mismatch")
         obstruction = record["first_bound_one_obstruction"]
         received = int(obstruction["received_word"], 2)
         require(received not in mapping, "claimed off-image obstruction is pinned")
-        require(not row_outputs(mapping, received, 1), "claimed bound-one row is feasible")
+        require(not row_outputs(mapping, received, 1, metrics), "claimed bound-one row is feasible")
         core = tuple(int(message, 2) for message in obstruction["source_messages"])
         sources = row_sources(mapping, received)
         require(set(core) <= set(sources), "core contains a non-source")
@@ -120,14 +128,15 @@ def check(spec: dict, result: dict) -> dict:
     require(result["pairwise_valid_mappings"] == len(solutions), "pairwise count mismatch")
     require(len(solutions) == 96, "independent printed-rule count changed")
     require(all(next(code for code in allowed if code not in mapping) == int("0101", 2) for mapping in solutions), "not every solution omits 0101")
-    require(all(minimum_bound(mapping) == 2 for mapping in solutions), "not every solution has exact total-decoder error two")
+    require(all(minimum_bound(mapping, metrics) == 2 for mapping in solutions), "not every solution has exact total-decoder error two")
     require(result["source_text_reported_pairwise_count"] == spec["source_text_reported_pairwise_count"], "source count metadata changed")
     require(result["count_agrees_with_source_text"] is False, "discrepancy flag is wrong")
     return {
         "accepted": True,
         "pairwise_valid_mappings_checked": len(solutions),
         "independent_partial_search_nodes": nodes,
-        "raw_received_rows_checked": len(solutions) * 16 * 4,
+        "logical_row_bound_slots": len(solutions) * 16 * 4,
+        "executed_row_output_calls": metrics["row_output_calls"],
         "exact_total_error_two_mappings": len(solutions),
         "omitted_center_mappings": len(solutions),
         "source_reported_count": spec["source_text_reported_pairwise_count"],

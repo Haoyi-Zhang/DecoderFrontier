@@ -73,7 +73,7 @@ def export(results: Path, output: Path) -> None:
             raise ValueError(f"{item['case']} proof check is not accepted")
         proof_rows.append(
             f"{item['case']} & {item['encoders']} & {check['semantic_rejections']} & "
-            f"{item['encoder_planes'] + item['decoder_relations']} & {item['proof_search_nodes']:,} \\\\"
+            f"{item['encoder_planes'] + item['decoder_relations']} & {item['lower_bound_replay_nodes']:,} \\\\"
         )
     (output / "proof-rows.tex").write_text(
         "\\newcommand{\\ProofRows}{%\n" + "\n".join(proof_rows) + "\n}\n"
@@ -115,8 +115,8 @@ def export(results: Path, output: Path) -> None:
         lf = ",".join(f"({x['error']},{x['gates']})" for x in ldata["frontier"])
         rf = ",".join(f"({x['error']},{x['gates']})" for x in rdata["frontier"])
         paired_eval.append(
-            f"{left} & {ldata['candidate_designs']:,} & ${lf}$ & {proof_by_case[left]['proof_search_nodes']:,} & "
-            f"{right} & {rdata['candidate_designs']:,} & ${rf}$ & {proof_by_case[right]['proof_search_nodes']:,} " + r"\\"
+            f"{left} & {ldata['candidate_designs']:,} & ${lf}$ & {proof_by_case[left]['lower_bound_replay_nodes']:,} & "
+            f"{right} & {rdata['candidate_designs']:,} & ${rf}$ & {proof_by_case[right]['lower_bound_replay_nodes']:,} " + r"\\"
         )
     (output / "paired-specification-rows.tex").write_text(
         "\\newcommand{\\PairedSpecificationRows}{%\n" + "\n".join(paired_specs) + "\n}\n"
@@ -134,7 +134,10 @@ def export(results: Path, output: Path) -> None:
         "ProofEncoders": proof_summary["encoders_covered"],
         "ProofPlanes": proof_summary["encoder_plane_certificates"] + proof_summary["decoder_relation_certificates"],
         "SemanticRejects": proof_summary["semantic_infeasible_profiles"],
-        "ProofNodes": proof_summary["proof_checker_node_visits"],
+        "ProofNodes": proof_summary["lower_bound_proof_replay_node_visits"],
+        "ProofGenerationNodes": proof_summary["all_generation_search_nodes"],
+        "ProofWitnessNodes": proof_summary["satisfying_witness_search_nodes"],
+        "ProofEarlierUnsatNodes": proof_summary["earlier_unsat_search_nodes"],
         "ProofRecords": proof_summary["stored_proof_tree_records"],
         "ProofGenerationCPU": f"{proof_summary['generation_cpu_seconds']:.3f}",
         "ProofCheckingCPU": f"{proof_summary['checking_cpu_seconds']:.3f}",
@@ -152,17 +155,27 @@ def export(results: Path, output: Path) -> None:
         "CampaignStageWall": f"{campaign['recorded_completed_stage_wall_seconds']:.3f}",
         "PeakChildRSSKiB": campaign["peak_child_rss_kib"],
         "MeasuredGenerationCheckerCPU": f"{campaign['measured_generation_and_checker_cpu_seconds']:.3f}",
-        "RetainedObligations": campaign["retained_proof_obligations_checked"],
-        "PrimitiveComparisons": campaign["primitive_error_pair_evaluations_in_generation"],
+        "LogicalCoverageUnits": campaign["checker_visible_logical_coverage_units"],
+        "CandidateObligations": campaign["candidate_source_received_obligations_covered"],
         "CandidateVisitAccount": campaign["design_visits_for_this_reproduction_plus_original_pilot"],
         "FixedExponent": fixed["decoder_completion_count_power_of_two"],
         "FixedPlanes": fixed_check["planes_checked"],
         "FixedCubes": fixed_check["cubes_checked"],
         "FixedPackingPairs": fixed_check["packing_pairs_checked"],
+        "FixedDomainBindings": fixed_check["plane_domain_bindings_checked"],
+        "FixedSemanticRows": fixed_check["decoder_semantic_rows_rechecked"],
+        "FixedInverseRows": fixed_check["decoder_inverse_rows_rechecked"],
+        "FixedControls": campaign["fixed_codebook_mutation_controls_passed"],
         "AuditedReferences": campaign["scholarly_references_checked"],
         "AnchorMappings": campaign["anchor_pairwise_valid_mappings"],
         "AnchorSourceCount": campaign["anchor_source_reported_pairwise_count"],
-        "AnchorRawChecks": json.loads((results / "anchor-pam3-check.json").read_text())["raw_received_rows_checked"],
+        "AnchorLogicalSlots": campaign["anchor_logical_row_bound_slots"],
+        "AnchorExecutedCalls": campaign["anchor_executed_row_output_calls"],
+        "BoundedInvocations": campaign["bounded_invocations"],
+        "ResumeInvocations": campaign["resume_invocations"],
+        "FinalResumedPrefix": campaign["final_invocation_resumed_prefix"],
+        "FinalInvocationStages": campaign["final_invocation_executed_stages"],
+        "UniqueCommandRecords": campaign["unique_command_records"],
         "EncodingAssignments": campaign["encoding_property_assignments_checked"],
         "EncodingRelationBounds": campaign["encoding_relation_bounds_checked"],
     }

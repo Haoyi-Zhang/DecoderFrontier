@@ -123,9 +123,15 @@ def main() -> None:
             matches = list(ROOT.glob(relative)) if any(ch in relative for ch in "*?[") else [ROOT / relative]
             require(any(path.exists() for path in matches), f"missing claim source {relative}")
         for relative in [item.strip() for item in row["raw_result"].split(";") if item.strip()]:
-            # These three files are finalized by the parent driver after all child
+            # These files are finalized by the parent driver after all child
             # stages, so a child-stage metadata audit cannot require them yet.
-            if relative in {"results/summary.csv", "results/campaign.json", "results/commands.json", "results/metadata-integrity.json"}:
+            if relative in {
+                "results/summary.csv",
+                "results/campaign.json",
+                "results/commands.json",
+                "results/metadata-integrity.json",
+                "results/evidence-counts.json",
+            }:
                 continue
             matches = list(ROOT.glob(relative)) if any(ch in relative for ch in "*?[") else [ROOT / relative]
             require(any(path.exists() for path in matches), f"missing claim result {relative}")

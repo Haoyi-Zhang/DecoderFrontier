@@ -15,7 +15,7 @@
     "selection_role": "locked analytical case; not a held-out statistical sample"
   },
   "candidate_designs": 256,
-  "explicit_error_pair_evaluations": 2560,
+  "candidate_source_received_obligations_covered": 2560,
   "pair_nonexpanding_encoders": 2,
   "pair_radius1_pass_total_fail_designs": 0,
   "frontier": [
@@ -100,7 +100,7 @@
   "distinct_encoder_tables": 2,
   "distinct_decoder_tables": 256,
   "cover_dynamic_program_states": 949,
-  "cpu_seconds": 0.011405681,
-  "wall_seconds": 0.011410634999947433,
-  "peak_rss_kib": 93864
+  "cpu_seconds": 0.011269543000000048,
+  "wall_seconds": 0.011274913000079323,
+  "peak_rss_kib": 93848
 }

@@ -45,6 +45,10 @@ For all 96 pairwise-valid mappings:
 
 Hence every mapping has exact total-decoder error two. This supplies an externally defined census of the semantic gap; it does not evaluate logic cost for those 96 mappings and does not establish the source paper's numerical count.
 
+## Logical coverage versus executed calls
+
+The full audit grid contains `96 mappings * 16 received rows * 4 error bounds = 6,144` logical mapping/row/bound slots. This number describes the complete finite domain whose outcomes are classified; it is not a count of calls made by the implementation. The independent minimum-bound routine stops after the first infeasible row at a bound, so instrumentation of the current control flow records 4,512 calls to the row-output constructor. `results/anchor-pam3-check.json` retains both counters. They are intentionally not added together or relabeled as proof-tree nodes.
+
 ## Mutation and trust boundary
 
 Eight mutations alter the count, delete or duplicate a mapping, change the omitted word, understate the total error, move the obstruction row, delete a core source, or falsely mark the source count as matched. The independent checker rejects all eight.

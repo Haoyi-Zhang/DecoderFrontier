@@ -17,7 +17,7 @@
     "selection_role": "development pilot"
   },
   "candidate_designs": 24576,
-  "explicit_error_pair_evaluations": 491520,
+  "candidate_source_received_obligations_covered": 491520,
   "pair_nonexpanding_encoders": 16,
   "pair_radius1_pass_total_fail_designs": 16384,
   "frontier": [
@@ -131,7 +131,7 @@
   "distinct_encoder_tables": 24,
   "distinct_decoder_tables": 24576,
   "cover_dynamic_program_states": 149684,
-  "cpu_seconds": 1.752692508,
-  "wall_seconds": 1.7529430520000915,
+  "cpu_seconds": 1.674064026,
+  "wall_seconds": 1.6760945910000373,
   "peak_rss_kib": 134048
 }
