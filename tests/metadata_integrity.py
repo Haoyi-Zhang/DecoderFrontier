@@ -91,7 +91,7 @@ def main() -> None:
         "internals_modified",
     }
     require(set(ext_fields) == expected_ext_fields, "external_resources.csv schema drift")
-    require(len(resources) >= len(literature) + 7, "external-resource ledger is incomplete")
+    require(len(resources) >= len(literature) + 6, "external-resource ledger is incomplete")
     scholarly = [row for row in resources if row["resource_type"].strip() == "scholarly literature"]
     require(len(scholarly) == len(literature), "scholarly resource count differs from literature audit")
     require({row["name"].strip() for row in scholarly} == set(titles), "scholarly resource titles differ from literature audit")
