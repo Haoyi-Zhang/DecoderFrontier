@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import itertools as it
 import json
+import math
 import resource
 import signal
 import time
@@ -20,6 +21,29 @@ from pathlib import Path
 def need(condition: bool, message: str) -> None:
     if not condition:
         raise ValueError(message)
+
+
+def require_exact_numbers(value, path: str = "certificate") -> None:
+    """Keep integer certificate fields distinct from Boolean/float aliases."""
+    if isinstance(value, (bool, float)):
+        raise ValueError(f"{path} contains a non-integer numeric value")
+    if isinstance(value, dict):
+        for key, child in value.items():
+            require_exact_numbers(child, f"{path}.{key}")
+    elif isinstance(value, (list, tuple)):
+        for index, child in enumerate(value):
+            require_exact_numbers(child, f"{path}[{index}]")
+
+
+def validate_certificate_numbers(cert: dict) -> None:
+    """Keep scientific integer fields exact without rejecting timing metadata."""
+    timing_fields = {"cpu_seconds", "wall_seconds"}
+    for key in timing_fields & cert.keys():
+        value = cert[key]
+        need(type(value) in (int, float) and math.isfinite(value) and value >= 0,
+             f"{key} must be finite nonnegative timing metadata")
+    require_exact_numbers({key: value for key, value in cert.items()
+                           if key not in timing_fields})
 
 
 def words(q: int, n: int) -> tuple[tuple[int, ...], ...]:
@@ -150,10 +174,13 @@ def check_plane(
     label: str,
 ) -> dict:
     """Check one plane after binding all shape and semantics to external data."""
+    require_exact_numbers(record, label)
     need(record.get("format") == "forced-cell-packing-v1", "unknown plane proof format")
+    need(type(record["width"]) is int, f"{label} width must be an integer")
+    need(type(record["outputs"]) is int, f"{label} output count must be an integer")
     claimed_domain = tuple(record["domain"])
-    claimed_width = int(record["width"])
-    claimed_outputs = int(record["outputs"])
+    claimed_width = record["width"]
+    claimed_outputs = record["outputs"]
     claimed_legal = tuple(tuple(row) for row in record["legal_outputs"])
 
     need(claimed_domain == expected_domain, f"{label} domain mismatch")
@@ -235,6 +262,7 @@ def recheck_decoder_semantics(
 def check_certificate(spec: dict, cert: dict) -> dict:
     started = time.perf_counter()
     cpu = time.process_time()
+    validate_certificate_numbers(cert)
     need(cert.get("format") == "fixed-codebook-frontier-v1", "unknown certificate format")
     case = cert["case"]
     for key in ("id", "q", "n", "k", "radius", "gate_cap", "connection_cap", "encoder"):
