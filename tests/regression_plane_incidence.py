@@ -4,7 +4,6 @@ The separate CI step does not change the frozen 81-stage scientific campaign.
 """
 import copy
 import functools
-import hashlib
 import itertools
 import json
 from pathlib import Path
@@ -71,7 +70,7 @@ def encoding_record(enc):
 
 @functools.lru_cache(maxsize=1)
 def snapshot():
-    planes = []; cases = []; formulas = []; refusals = []
+    planes = []; cases = []; refusals = []
     with patch.object(producer.time, 'perf_counter', return_value=0.0):
         for spec in load('inputs/cases.json'):
             retained = load(f"results/proof-frontiers/{spec['id']}.json")
@@ -92,9 +91,6 @@ def snapshot():
                         enc = producer.build_plane_cnf(domain, width, outputs, legal, bound)
                         ref = checker.plane_formula(domain, width, outputs, legal, bound)
                         assert enc.cnf.variable_count == ref.variables and enc.cnf.clauses == ref.clauses
-                        ordered = json.dumps(encoding_record(enc), sort_keys=True, separators=(',', ':'))
-                        formulas.append([spec['id'], collection, key, bound,
-                                         hashlib.sha256(ordered.encode()).hexdigest()])
             cases.append(checker.verify_case(current, spec, load(f"results/{spec['id']}.json")))
         for domain, width, legal, maximum in (
             ((0,), -1, (), 2), ((0,), -1, ((),), 2),
@@ -106,9 +102,28 @@ def snapshot():
                 refusals.append([type(exc).__name__, str(exc)])
             else:
                 raise AssertionError('missing refusal')
-    return {'planes': planes, 'cases': cases, 'ordered_formula_hashes': formulas, 'refusals': refusals}
+    return {'planes': planes, 'cases': cases, 'refusals': refusals}
 
 class PlaneIncidenceTests(unittest.TestCase):
+    def test_tiny_snapshot_keeps_verification_without_unused_inventory(self):
+        # Exercise the snapshot's real CNF/replay path without the full campaign.
+        with patch.object(producer.time, 'perf_counter', return_value=0.0):
+            plane = producer.solve_plane((0,), 1, 1, ((0,),), 0)
+            plane.update(domain=[0], width=1, outputs=1, legal_outputs=[[0]])
+            spec = {'id': 'owned-tiny', 'gate_cap': 0}
+            fixtures = {'inputs/cases.json': [spec],
+                        'results/proof-frontiers/owned-tiny.json':
+                            {'encoder_planes': {'tiny': plane}, 'decoder_planes': {}},
+                        'results/owned-tiny.json': {}}
+            with patch(__name__ + '.load', side_effect=fixtures.__getitem__), \
+                    patch.object(checker, 'verify_case', return_value={'owned': True}) as checked:
+                result = snapshot.__wrapped__()
+        self.assertEqual(set(result), {'planes', 'cases', 'refusals'})
+        self.assertEqual(len(result['planes']), 1)
+        self.assertEqual(result['cases'], [{'owned': True}])
+        self.assertEqual(len(result['refusals']), 4)
+        checked.assert_called_once()
+
     def test_complete_current_planes_and_independent_replay(self):
         result = snapshot()
         self.assertEqual(len(result['planes']), 384)
