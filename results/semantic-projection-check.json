@@ -319,6 +319,6 @@
       "accepted": true
     }
   ],
-  "cpu_seconds": 0.018027298000000025,
-  "peak_rss_kib": 96300
+  "cpu_seconds": 0.029995024,
+  "peak_rss_kib": 16216
 }

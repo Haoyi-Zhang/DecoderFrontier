@@ -9,5 +9,9 @@
     "bounds": 36,
     "correlated_forbidden_tuple_checks": 2
   },
+  "packing_domains": {
+    "ordered_domains": 64,
+    "sparse_exact_planes": 1
+  },
   "scope": "Exhaustive small-oracle tests; not a proof for arbitrary encodings."
 }

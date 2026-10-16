@@ -95,7 +95,7 @@
   "distinct_encoder_tables": 2,
   "distinct_decoder_tables": 256,
   "cover_dynamic_program_states": 912,
-  "cpu_seconds": 0.015048620000000013,
-  "wall_seconds": 0.015054130999942572,
-  "peak_rss_kib": 93868
+  "cpu_seconds": 0.018995447999999998,
+  "wall_seconds": 0.019254287999999065,
+  "peak_rss_kib": 14380
 }

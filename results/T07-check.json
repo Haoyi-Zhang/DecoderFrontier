@@ -10,7 +10,7 @@
       8
     ]
   ],
-  "cpu_seconds": 0.05575028600000004,
-  "wall_seconds": 0.055758137999873725,
-  "peak_rss_kib": 94244
+  "cpu_seconds": 0.091984501,
+  "wall_seconds": 0.09193120799999122,
+  "peak_rss_kib": 14764
 }

@@ -14,11 +14,11 @@
   "lower_bound_proof_replay_node_visits": 88664,
   "proof_checker_conflict_leaf_visits": 44524,
   "frontier_points": 18,
-  "generation_cpu_seconds": 24.834194324000002,
-  "generation_wall_seconds_sum": 24.837848713000312,
-  "checking_cpu_seconds": 16.585387154,
-  "checking_wall_seconds_sum": 16.58768748500006,
-  "certificate_bytes": 876367,
+  "generation_cpu_seconds": 25.350931341,
+  "generation_wall_seconds_sum": 25.355532014999923,
+  "checking_cpu_seconds": 15.217350791,
+  "checking_wall_seconds_sum": 15.217149730999978,
+  "certificate_bytes": 876306,
   "mutation_controls_passed": 8,
   "per_case": [
     {
@@ -37,8 +37,8 @@
           5
         ]
       ],
-      "generation_cpu_seconds": 0.010690581000000032,
-      "checking_cpu_seconds": 0.005632232000000015
+      "generation_cpu_seconds": 0.016998996000000002,
+      "checking_cpu_seconds": 0.008995781000000001
     },
     {
       "case": "B02",
@@ -56,8 +56,8 @@
           10
         ]
       ],
-      "generation_cpu_seconds": 2.258379729,
-      "checking_cpu_seconds": 0.525649207
+      "generation_cpu_seconds": 2.3277519420000004,
+      "checking_cpu_seconds": 0.528966704
     },
     {
       "case": "B03",
@@ -75,8 +75,8 @@
           10
         ]
       ],
-      "generation_cpu_seconds": 1.545945656,
-      "checking_cpu_seconds": 0.754808242
+      "generation_cpu_seconds": 1.6149308450000002,
+      "checking_cpu_seconds": 0.701936451
     },
     {
       "case": "B04",
@@ -94,8 +94,8 @@
           10
         ]
       ],
-      "generation_cpu_seconds": 1.379683847,
-      "checking_cpu_seconds": 0.821435288
+      "generation_cpu_seconds": 1.41291659,
+      "checking_cpu_seconds": 0.743933
     },
     {
       "case": "B05",
@@ -117,8 +117,8 @@
           6
         ]
       ],
-      "generation_cpu_seconds": 0.023033460000000006,
-      "checking_cpu_seconds": 0.008942233000000022
+      "generation_cpu_seconds": 0.026995504000000003,
+      "checking_cpu_seconds": 0.011995773000000001
     },
     {
       "case": "B06",
@@ -140,8 +140,8 @@
           6
         ]
       ],
-      "generation_cpu_seconds": 0.08552571800000003,
-      "checking_cpu_seconds": 0.02914244100000002
+      "generation_cpu_seconds": 0.103983042,
+      "checking_cpu_seconds": 0.042997194
     },
     {
       "case": "B07",
@@ -159,8 +159,8 @@
           5
         ]
       ],
-      "generation_cpu_seconds": 0.0018029299999999804,
-      "checking_cpu_seconds": 0.0015343710000000343
+      "generation_cpu_seconds": 0.002996776999999999,
+      "checking_cpu_seconds": 0.0019975940000000053
     },
     {
       "case": "B08",
@@ -178,8 +178,8 @@
           7
         ]
       ],
-      "generation_cpu_seconds": 0.02180544499999998,
-      "checking_cpu_seconds": 0.007454601000000005
+      "generation_cpu_seconds": 0.027996881000000008,
+      "checking_cpu_seconds": 0.010995405
     },
     {
       "case": "T01",
@@ -197,8 +197,8 @@
           5
         ]
       ],
-      "generation_cpu_seconds": 0.004962797000000019,
-      "checking_cpu_seconds": 0.002952408999999989
+      "generation_cpu_seconds": 0.007999525,
+      "checking_cpu_seconds": 0.004994603
     },
     {
       "case": "T02",
@@ -216,8 +216,8 @@
           12
         ]
       ],
-      "generation_cpu_seconds": 19.111927292,
-      "checking_cpu_seconds": 14.351474675
+      "generation_cpu_seconds": 19.367416747,
+      "checking_cpu_seconds": 13.044571361
     },
     {
       "case": "T03",
@@ -235,8 +235,8 @@
           7
         ]
       ],
-      "generation_cpu_seconds": 0.090164784,
-      "checking_cpu_seconds": 0.014527015000000032
+      "generation_cpu_seconds": 0.102994279,
+      "checking_cpu_seconds": 0.023995017
     },
     {
       "case": "T04",
@@ -254,8 +254,8 @@
           7
         ]
       ],
-      "generation_cpu_seconds": 0.03075159300000002,
-      "checking_cpu_seconds": 0.004999171999999996
+      "generation_cpu_seconds": 0.03598189499999999,
+      "checking_cpu_seconds": 0.007996956999999999
     },
     {
       "case": "T05",
@@ -273,8 +273,8 @@
           5
         ]
       ],
-      "generation_cpu_seconds": 0.0017096920000000404,
-      "checking_cpu_seconds": 0.0011157489999999992
+      "generation_cpu_seconds": 0.001995846999999995,
+      "checking_cpu_seconds": 0.0009978900000000013
     },
     {
       "case": "T06",
@@ -292,8 +292,8 @@
           7
         ]
       ],
-      "generation_cpu_seconds": 0.022157287000000025,
-      "checking_cpu_seconds": 0.00474322100000002
+      "generation_cpu_seconds": 0.024988462000000003,
+      "checking_cpu_seconds": 0.007996004000000001
     },
     {
       "case": "T07",
@@ -311,8 +311,8 @@
           8
         ]
       ],
-      "generation_cpu_seconds": 0.176078878,
-      "checking_cpu_seconds": 0.03576005900000001
+      "generation_cpu_seconds": 0.19998785000000002,
+      "checking_cpu_seconds": 0.050984075000000004
     },
     {
       "case": "T08",
@@ -330,11 +330,11 @@
           7
         ]
       ],
-      "generation_cpu_seconds": 0.069574635,
-      "checking_cpu_seconds": 0.015216238999999965
+      "generation_cpu_seconds": 0.074996159,
+      "checking_cpu_seconds": 0.023996982
     }
   ],
   "scope": "Exact finite grammar and locked cases only. The 88,664 replay visits are the final one-fewer-product lower-bound trees; total producer DPLL search also includes earlier unsatisfiable bounds and satisfying witness searches.",
-  "aggregation_cpu_seconds": 0.016245620000000016,
-  "peak_rss_kib": 100272
+  "aggregation_cpu_seconds": 0.019999171000000003,
+  "peak_rss_kib": 20624
 }

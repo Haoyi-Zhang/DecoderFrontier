@@ -63,8 +63,8 @@ Each invocation advances the longest valid completed prefix by at most eight
 stages. Source/input identity is bound in `results/resume-state.json`; changed
 inputs reject resume, and a missing stage output invalidates that stage and its
 suffix. Restart without `--resume` only in the disposable copy. The retained
-eleven-invocation campaign finished all 81 stages; those invocation counts are
-historical observations, not required counts for a new run.
+Ubuntu campaign completes all 81 stages; actual invocation and resume counts
+are recorded in `results/campaign.json`, not imposed on subsequent runs.
 
 The scientific workflow runs the numeric checks, incidence regression and full
 campaign on Ubuntu 24.04 with whole-run limits, and uploads available raw outputs
