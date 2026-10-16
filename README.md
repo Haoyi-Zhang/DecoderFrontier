@@ -1,10 +1,16 @@
 # Proof-Carrying Total-Decoder Frontiers
 
+Project repository: https://github.com/Haoyi-Zhang/DecoderFrontier
+
 This artifact certifies complete error-versus-counted-site frontiers for the
 locked constrained-code grammar and inputs. It includes separately implemented
 semantic/certificate checkers and exhaustive small-case oracles. Completeness is
 for those inputs, not every parameter combination under the dimensional caps,
 a generic MaxSAT proof system or physical-design performance.
+
+## Manuscript figures
+
+`figures/draw_diagrams.py` exports the obstruction, certificate flow and retained B05/B06 frontiers directly as embedded-font vector PDFs. Drawing uses Matplotlib 3.11.2 with no TeX/PGF backend and is separate from the standard-library scientific workflow. Run `python -B figures/draw_diagrams.py --check` for the illustrated obstruction, exact retained coordinates, label bounds and deterministic fresh exports, or use `--output-dir PATH` to select a destination.
 
 ## Environment and quick checks
 
@@ -86,7 +92,7 @@ on success or failure.
 - `claim_evidence_ledger.csv`, `literature-audit.csv`,
   `external_resources.csv`: preserved evidence and source/provenance mappings.
 
-Export derived LaTeX tables, macros and PGFPlots coordinates without rerunning
+Export derived LaTeX tables, macros and frontier coordinate CSV files without rerunning
 the campaign, using a separate output directory:
 
 ```sh
