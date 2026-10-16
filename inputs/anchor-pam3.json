@@ -11,5 +11,5 @@
   "channel_error_radius_bits": 1,
   "target_total_decoder_bound": 1,
   "source_text_reported_pairwise_count": 72,
-  "interpretation_note": "The census implements the codeword list in Fig. 5 and the no-error-growth inequality printed in Table I of the source. It is labeled a printed-constraint audit, not a claimed reproduction of the source's reported count."
+  "interpretation_note": "The census implements Fig. 5 and Table I. A cube-cycle proof and an unpruned 9P8 replay establish the exact count 96; the source-reported 72 is retained as a quotation, not used as a target or attributed to an undocumented implementation cause."
 }

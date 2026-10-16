@@ -12,6 +12,7 @@ import resource
 import signal
 import time
 from pathlib import Path
+from anchor_count_proof import verify_count
 
 
 def require(condition: bool, message: str) -> None:
@@ -131,6 +132,7 @@ def check(spec: dict, result: dict) -> dict:
     require(all(minimum_bound(mapping, metrics) == 2 for mapping in solutions), "not every solution has exact total-decoder error two")
     require(result["source_text_reported_pairwise_count"] == spec["source_text_reported_pairwise_count"], "source count metadata changed")
     require(result["count_agrees_with_source_text"] is False, "discrepancy flag is wrong")
+    count_proof = verify_count(spec, delivered_mappings)
     return {
         "accepted": True,
         "pairwise_valid_mappings_checked": len(solutions),
@@ -141,7 +143,8 @@ def check(spec: dict, result: dict) -> dict:
         "omitted_center_mappings": len(solutions),
         "source_reported_count": spec["source_text_reported_pairwise_count"],
         "printed_rule_count": len(solutions),
-        "discrepancy_status": "unresolved; not labeled a source reproduction",
+        "discrepancy_status": "exact printed-condition count established as 96; source-reported 72 is inconsistent",
+        "count_reconciliation": count_proof,
         "cpu_seconds": time.process_time() - cpu,
         "wall_seconds": time.perf_counter() - begin,
         "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,

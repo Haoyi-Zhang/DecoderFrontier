@@ -32,7 +32,7 @@
     "selection_basis": "The codeword list and pairwise inequality come from the project anchor paper, not from tuning on the delivered method.",
     "complete_pairwise_valid_mappings": 96,
     "source_text_reported_count": 72,
-    "status": "Unresolved numerical discrepancy; explicitly not labeled a source reproduction.",
+    "status": "Exact printed-condition count 96 proved by cube cycles and unpruned replay; the reported 72 is inconsistent with those conditions.",
     "partial_search_nodes_producer": 3666,
     "independent_check": "Different message order and codeword traversal."
   }

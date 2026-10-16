@@ -401,6 +401,12 @@ def main() -> None:
         raise RuntimeError('Anchor printed-constraint census replay incomplete')
     if len(anchor_controls) != 8 or not all(item.get('passed') for item in anchor_controls):
         raise RuntimeError('Anchor census mutation controls incomplete')
+    count_proof = anchor_check.get('count_reconciliation', {})
+    if not (count_proof.get('accepted') and count_proof.get('exact_count') == anchor['pairwise_valid_mappings']
+            and count_proof.get('unpruned_injections_checked') == 362880
+            and count_proof.get('cube_cycle_count_factors') == [8, 3, 4]
+            and count_proof.get('input_isometry_orbit_sizes') == [48, 48]):
+        raise RuntimeError('Anchor mathematical count reconciliation incomplete')
     if not encoding_properties.get('accepted'):
         raise RuntimeError('Small-oracle encoding property checks incomplete')
     metadata = json.loads((results / 'metadata-integrity.json').read_text())
@@ -459,7 +465,10 @@ def main() -> None:
         'anchor_printed_rule_count': anchor_check['printed_rule_count'],
         'anchor_logical_row_bound_slots': anchor_check['logical_row_bound_slots'],
         'anchor_executed_row_output_calls': anchor_check['executed_row_output_calls'],
-        'anchor_count_discrepancy_resolved': False,
+        'anchor_count_discrepancy_resolved': True,
+        'anchor_count_resolution': count_proof['resolution'],
+        'anchor_unpruned_injections_checked': count_proof['unpruned_injections_checked'],
+        'anchor_cube_cycle_count': count_proof['exact_count'],
         'anchor_mutation_controls_passed': len(anchor_controls),
         'encoding_property_assignments_checked': encoding_properties['cardinality']['assignments'],
         'encoding_relation_bounds_checked': encoding_properties['relational']['bounds'],
@@ -497,8 +506,9 @@ def main() -> None:
         ),
         'research_gate': (
             'Implemented and independently replayed code-specific finite frontier certificates for the frozen grammar, a spec-bound '
-            '2^72-completion fixed-codebook case, and a complete external PAM-3 printed-constraint census. The source-count discrepancy '
-            'is disclosed rather than resolved; no generic MO-MaxSAT, physical-design, or asymptotic claim.'
+            '2^72-completion fixed-codebook case, and a complete external PAM-3 printed-constraint census. The exact count 96 '
+            'is established by cube cycles and an additional 362880-injection replay; the source-reported 72 is inconsistent '
+            'with the printed conditions. The additional count-only replay is separate from the locked synthesis-design visit budget.'
         ),
     }
     if len(records) != len(stages):

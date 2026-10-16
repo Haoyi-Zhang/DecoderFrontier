@@ -6,9 +6,9 @@ all injective mappings satisfying exactly that displayed rule using a pruned
 backtracking search.  It then evaluates the stronger *total-decoder* radius-one
 raw-bit obligation on every accepted mapping.
 
-The source text reports 72 mappings.  The explicit printed-rule census below is
-kept separate from a reproduction claim because its independently checked count
-differs.  No source implementation or private input is used.
+The source text reports 72 mappings. A separate cube-cycle proof and unpruned
+replay establish 96 for its printed conditions. No source implementation or
+private input is used, and no unpublished implementation error is assumed.
 """
 from __future__ import annotations
 
@@ -137,7 +137,7 @@ def generate(spec: dict) -> dict:
         "minimum_total_decoder_error_counts": minimum_error_counts,
         "source_text_reported_pairwise_count": spec["source_text_reported_pairwise_count"],
         "count_agrees_with_source_text": len(solutions) == spec["source_text_reported_pairwise_count"],
-        "status": "printed-constraint audit; unresolved numerical discrepancy with source text",
+        "status": "exact printed-condition count 96; source-reported 72 is inconsistent with those conditions",
         "cpu_seconds": time.process_time() - cpu,
         "wall_seconds": time.perf_counter() - started,
         "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,

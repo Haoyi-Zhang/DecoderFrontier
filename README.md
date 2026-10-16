@@ -111,11 +111,17 @@ relations, counters, clauses, objective profile and encoder coverage without
 importing the producer or exhaustive synthesizer. The diagnostic pair-only
 frontier is outside the complete independent-frontier claim.
 
-The PAM-3 A01 census yields 96 mappings under the displayed rule, whereas the
-source reports 72. The unresolved discrepancy is retained as a printed-constraint
-audit, not a numerical reproduction or correction of the source. T02/X01 are
-disclosed development cases; the locked synthetic cases and complete A01 census
-do not establish population prevalence or practical speed.
+The exact PAM-3 A01 count is 96. A cube-cycle argument gives `8*3*4`, and an
+unpruned traversal of all 362,880 injections agrees with both complete censuses
+on the full mapping set. The 48 input-cube isometries give two complete orbits;
+the source-reported 72 is not a multiple of 48 and is inconsistent with its
+printed conditions. `proofs/anchor-audit.md` gives the argument, and the checker
+records its finite cross-check in `count_reconciliation`. The published 72 is
+preserved as a quotation, not substituted for the computed answer. Run the four
+portable regressions with `python -B -m unittest discover -s tests -p test_anchor_count.py -v`.
+The additional count-only traversal is separate from the locked synthesis-design
+visit budget. T02/X01 are disclosed development cases; the locked synthetic cases
+and complete A01 census do not establish population prevalence or practical speed.
 
 Python, checker code and handwritten soundness arguments remain trusted.
 Separate code paths are not independent human review or mechanical proof;
